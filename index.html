@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taqueria Don Jose – Authentic Mexican Food & Delivery</title>
+    <link rel="icon" id="favicon" type="image/png" href="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1792081318/TaqueriaDonJoseLOGO_iodgsv.png">
+    
+    <!-- Google Fonts: Luckiest Guy (Headers), Boogaloo (Buttons/Subtitles), Quicksand (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Luckiest+Guy&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           MODERN MEXICAN CARTOON/RUSTIC THEME VARIABLES
+           ========================================================================== */
+        :root {
+            --color-bg-cream: #FDFBF7;
+            --color-btn-green: #2E7D32;
+            --color-btn-green-hover: #1B5E20;
+            --color-text-brown: #4E342E;
+            --color-accent-orange: #FF9800;
+            --color-detail-pink: #E91E63;
+            --color-subtle-purple: #9C27B0;
+            --color-white: #ffffff;
+            --color-footer: #3E2723;
+            
+            --font-display: 'Luckiest Guy', cursive;
+            --font-accent: 'Boogaloo', cursive;
+            --font-body: 'Quicksand', sans-serif;
+
+            --border-chunky: 4px solid var(--color-text-brown);
+            --shadow-chunky: 6px 6px 0px var(--color-text-brown);
+            --shadow-chunky-hover: 3px 3px 0px var(--color-text-brown);
+            --radius-fun: 20px;
+        }
+
+        /* ==========================================================================
+           RESET & BASE
+           ========================================================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--color-text-brown);
+            background-color: var(--color-bg-cream);
+            background-image: radial-gradient(var(--color-detail-pink) 0.5px, transparent 0.5px), radial-gradient(var(--color-detail-pink) 0.5px, var(--color-bg-cream) 0.5px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: normal; letter-spacing: 1.5px; }
+        p { font-weight: 500; font-size: 1.1rem; }
+
+        /* ==========================================================================
+           NAVIGATION
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background-color: var(--color-bg-cream);
+            border-bottom: var(--border-chunky);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(78, 52, 46, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-family: var(--font-display);
+            font-size: 28px;
+            color: var(--color-text-brown);
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px var(--color-detail-pink);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-family: var(--font-accent);
+            font-size: 22px;
+            color: var(--color-text-brown);
+            letter-spacing: 1px;
+            transition: color 0.3s ease, transform 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--color-detail-pink);
+            transform: translateY(-2px);
+        }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--color-white);
+            border: 2px solid var(--color-text-brown);
+            border-radius: 12px;
+            padding: 5px 10px;
+            font-family: var(--font-display);
+            font-size: 16px;
+            box-shadow: 3px 3px 0px var(--color-text-brown);
+        }
+
+        .lang-btn {
+            cursor: pointer;
+            transition: color 0.3s ease;
+            color: #b0a8a6;
+        }
+
+        .lang-btn.active { color: var(--color-detail-pink); }
+        .lang-divider { color: var(--color-text-brown); }
+
+        .navbar-toggler {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .toggler-icon {
+            width: 30px;
+            height: 4px;
+            background-color: var(--color-text-brown);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* ==========================================================================
+           BUTTONS & UI ELEMENTS (ESTILIZANDO EL BOTÓN GLORIAFOOD DIRECTAMENTE)
+           ========================================================================== */
+        /* Aplicamos los estilos del botón directamente a la clase .glf-button de GloriaFood usando !important */
+        .glf-button {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-family: var(--font-accent) !important;
+            font-size: 22px !important;
+            padding: 12px 30px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 2px !important;
+            border-radius: var(--radius-fun) !important;
+            border: var(--border-chunky) !important;
+            box-shadow: var(--shadow-chunky) !important;
+            transition: all 0.2s ease !important;
+            cursor: pointer !important;
+            text-align: center !important;
+            text-decoration: none !important;
+            background-color: var(--color-btn-green) !important;
+            color: var(--color-white) !important;
+            margin: 0 !important;
+        }
+
+        .glf-button:hover {
+            transform: translate(3px, 3px) !important;
+            box-shadow: var(--shadow-chunky-hover) !important;
+            background-color: var(--color-btn-green-hover) !important;
+        }
+
+        .section-title {
+            font-size: 48px;
+            color: var(--color-text-brown);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: var(--color-detail-pink);
+            border-radius: 10px;
+            transform: rotate(-1deg);
+        }
+        .section-title.centered::after { left: 50%; transform: translateX(-50%) rotate(-1deg); width: 80%; }
+        .section-title.centered { text-align: center; display: block; margin-inline: auto; width: fit-content; }
+
+        .section-subtitle {
+            font-family: var(--font-accent);
+            font-size: 24px;
+            color: var(--color-accent-orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 30px;
+        }
+        .section-subtitle.centered { text-align: center; }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 80px;
+            background-color: var(--color-bg-cream);
+            overflow: hidden;
+        }
+        
+        .hero-bg-img {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081329/unnamed_vutjn3.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 40px;
+            background: var(--color-bg-cream);
+            border: var(--border-chunky);
+            border-radius: var(--radius-fun);
+            box-shadow: 12px 12px 0px var(--color-accent-orange);
+            transform: rotate(-1deg);
+        }
+
+        .hero-logo-container { margin-bottom: 20px; }
+        .hero-logo {
+            max-height: 150px;
+            margin: 0 auto;
+            filter: drop-shadow(4px 4px 0px rgba(78,52,46,0.3));
+            transform: rotate(2deg);
+        }
+
+        .hero-title {
+            font-size: 64px;
+            color: var(--color-text-brown);
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0px var(--color-white), 6px 6px 0px var(--color-subtle-purple);
+            line-height: 1.1;
+        }
+
+        .hero-address {
+            font-family: var(--font-body);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-brown);
+            margin: 20px 0 30px;
+            background: var(--color-white);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 2px dashed var(--color-detail-pink);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Decorative Elements */
+        .deco-svg { position: absolute; z-index: 1; pointer-events: none; }
+        .deco-1 { top: 15%; left: 5%; width: 100px; transform: rotate(-15deg); }
+        .deco-2 { bottom: 10%; right: 5%; width: 120px; transform: rotate(20deg); }
+
+        /* ==========================================================================
+           ABOUT SECTION
+           ========================================================================== */
+        .about-section { padding: 100px 0; position: relative; }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+            background: var(--color-white);
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px solid var(--color-text-brown);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.05);
+            transform: rotate(0.5deg);
+        }
+
+        .about-images { 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            position: relative; 
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: var(--radius-fun);
+            border: var(--border-chunky);
+            box-shadow: var(--shadow-chunky);
+            transition: transform 0.3s, z-index 0.3s;
+        }
+        
+        .about-image:nth-child(1) { transform: rotate(-3deg) translateY(15px); }
+        .about-image:nth-child(2) { transform: rotate(3deg) translateY(-15px); }
+        
+        .about-image:hover { 
+            transform: rotate(0deg) scale(1.05); 
+            z-index: 10; 
+            position: relative; 
+        }
+
+        /* ==========================================================================
+           REVIEWS SECTION (SCRIPT AUTO-SCROLL INFINITO)
+           ========================================================================== */
+        .reviews-section {
+            padding: 80px 0;
+            background-color: var(--color-btn-green);
+            border-top: var(--border-chunky);
+            border-bottom: var(--border-chunky);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reviews-section .section-title { color: var(--color-white); }
+        .reviews-section .section-title::after { background-color: var(--color-accent-orange); }
+        .reviews-section .section-subtitle { color: var(--color-white); }
+
+        .reviews-slider-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 30px;
+        }
+        
+        /* Efecto de degradado en los bordes para disimular la entrada/salida de tarjetas */
+        .reviews-slider-container::before,
+        .reviews-slider-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 80px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .reviews-slider-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--color-btn-green), transparent);
+        }
+        .reviews-slider-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--color-btn-green), transparent);
+        }
+
+        .reviews-slider {
+            display: flex;
+            overflow-x: hidden; /* Ocultamos el scrollbar, el JS hará todo el trabajo */
+            gap: 30px;
+            padding: 20px 0 40px 0;
+            white-space: nowrap; /* Mantiene las tarjetas en una sola línea */
+            cursor: grab;
+        }
+        
+        .reviews-slider:active { cursor: grabbing; }
+
+        .review-card {
+            min-width: 360px;
+            max-width: 360px;
+            background: var(--color-bg-cream);
+            border: var(--border-chunky);
+            border-radius: var(--radius-fun);
+            padding: 25px;
+            box-shadow: 8px 8px 0px var(--color-text-brown);
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transform: rotate(1deg);
+            transition: transform 0.3s;
+            white-space: normal; /* Restablecemos el white-space para el texto interior */
+        }
+        .review-card:nth-child(even) { transform: rotate(-1deg); }
+        .review-card:hover { transform: translateY(-5px) rotate(0deg); }
+
+        .review-header { display: flex; align-items: center; gap: 15px; }
+        .reviewer-avatar {
+            width: 50px; height: 50px;
+            background: var(--color-subtle-purple);
+            color: var(--color-white);
+            font-family: var(--font-display);
+            font-size: 24px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            border: 3px solid var(--color-text-brown);
+        }
+        .reviewer-info h4 { font-family: var(--font-body); font-weight: 700; font-size: 18px; margin-bottom: 2px; letter-spacing: 0; }
+        .reviewer-info span { font-size: 13px; color: #666; font-weight: 600; display: block; }
+        
+        .review-stars { color: var(--color-accent-orange); font-size: 20px; letter-spacing: 2px; }
+        .review-text { font-size: 15px; line-height: 1.6; font-weight: 600; flex-grow: 1; }
+        .review-meta { font-size: 12px; color: #888; font-weight: 700; margin-top: 10px; display: flex; align-items: center; gap: 5px; }
+
+        /* ==========================================================================
+           GALLERY SECTION
+           ========================================================================== */
+        .gallery-section { padding: 100px 0; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: var(--radius-fun);
+            border: var(--border-chunky);
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: var(--shadow-chunky);
+            z-index: 2;
+            position: relative;
+        }
+
+        /* ==========================================================================
+           INFO SECTION
+           ========================================================================== */
+        .info-section { padding: 80px 0; background-color: var(--color-white); border-top: var(--border-chunky); border-bottom: var(--border-chunky); }
+        .info-box {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--color-bg-cream);
+            border: var(--border-chunky);
+            border-radius: var(--radius-fun);
+            padding: 50px;
+            box-shadow: 10px 10px 0px var(--color-detail-pink);
+            text-align: center;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .info-item {
+            background: var(--color-white);
+            padding: 30px 20px;
+            border-radius: 15px;
+            border: 3px dashed var(--color-accent-orange);
+            transition: transform 0.3s;
+        }
+        .info-item:hover { transform: translateY(-5px); }
+        .info-item h4 { font-size: 26px; color: var(--color-text-brown); margin-bottom: 10px; }
+        .info-item p { font-size: 16px; font-weight: 700; color: #555; }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        .site-footer {
+            background-color: var(--color-footer);
+            padding: 80px 0 30px;
+            color: var(--color-bg-cream);
+            position: relative;
+        }
+        .site-footer::before {
+            content: ''; position: absolute; top: -15px; left: 0; width: 100%; height: 30px;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg"><path d="M0,20 Q25,0 50,20 T100,20 L100,20 L0,20 Z" fill="%233E2723"/></svg>');
+            background-size: 50px 20px; background-repeat: repeat-x;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .footer-title { font-size: 32px; color: var(--color-accent-orange); margin-bottom: 20px; }
+        .footer-col p { font-size: 16px; line-height: 2; font-weight: 600; }
+        
+        .social-icons {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .social-link {
+            display: flex; align-items: center; justify-content: center;
+            width: 50px; height: 50px;
+            background: var(--color-bg-cream);
+            color: var(--color-text-brown);
+            border-radius: 50%;
+            border: 3px solid var(--color-text-brown);
+            transition: all 0.3s;
+        }
+        .social-link:hover {
+            background: var(--color-detail-pink);
+            color: var(--color-white);
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-bg-cream);
+            border-top: 2px dashed rgba(255,255,255,0.2);
+            padding-top: 25px;
+            font-family: var(--font-body);
+        }
+        .footer-copyright a {
+            color: var(--color-accent-orange);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: underline;
+            text-decoration-style: wavy;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .about-grid, .info-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 52px; }
+            .hero-content { margin: 0 20px; padding: 30px; }
+        }
+        @media (max-width: 768px) {
+            .navbar-toggler { display: flex; }
+            .nav-menu {
+                position: absolute; top: 100%; left: 0; right: 0;
+                flex-direction: column;
+                background-color: var(--color-bg-cream);
+                border-bottom: var(--border-chunky);
+                padding: 20px;
+                transform: translateY(-150%);
+                opacity: 0; visibility: hidden; transition: all 0.3s ease;
+            }
+            .nav-menu.active { transform: translateY(0); opacity: 1; visibility: visible; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 40px; }
+            .section-title { font-size: 38px; }
+            .review-card { min-width: 300px; max-width: 300px; }
+        }
+        @media (max-width: 480px) {
+            .hero-buttons { flex-direction: column; align-items: stretch; }
+            .glf-button { width: 100% !important; }
+            .about-images { grid-template-columns: 1fr; }
+            .about-image:nth-child(2) { display: none; }
+        }
+    </style>
+    
+    <!-- State initialization -->
+    <script>
+        window.MENU_TECH_STATE = {
+            "lang":"en",
+            "showAbout":true,
+            "showGallery":true,
+            "showInfo":true,
+            "cuid":"1308a7fe-0b08-41ea-92c8-9ff2b481c543",
+            "ruid":"fc032d82-7466-4ba9-8694-8b537f317acb",
+            "title":"TAQUERIA DON JOSE",
+            "logoImg":"https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081318/TaqueriaDonJoseLOGO_iodgsv.png",
+            "heroAddress":"3875 Old Town Rd, Huntingtown, MD 20639",
+            "heroImg":"https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081329/unnamed_vutjn3.webp",
+            "aboutImg1":"https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081336/538092503_122095818824997467_3117063213037309063_n_vjjg1f.jpg",
+            "aboutImg2":"https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081344/582992828_122117153606997467_8128709734301550389_n_itsyxg.jpg",
+            "gallery":[
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081545/Veggie_quesadilla_knstld.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081546/El_volcano_fd0bbw.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081546/Traditional_tacos_skoa9j.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081546/Burrito_Jalisco_oitlxo.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081547/749315282_122143554254997467_6195440696111144573_n_cpflvt.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081548/749076645_122143554044997467_8690095640223917991_n_ydus4j.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081548/748534173_122143640318997467_3149160180485942400_n_z69ezp.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081549/746026956_122143553900997467_5803715592687454885_n_jzver4.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081550/739214567_122142645686997467_4934670089438241223_n_tpcsv1.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081551/744662114_122143388210997467_1700693493596053362_n_pohcvk.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081551/743050531_122142825254997467_2021352782319016799_n_tgmyz9.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081552/744294887_122143387874997467_3775452842104930348_n_vhhwv1.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081552/741168732_122142824714997467_1594205096479873255_n_kvly1m.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081552/739437460_122142646784997467_5636785289501577123_n_fmwruv.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081553/735133866_122142139448997467_8794577069526566530_n_othqo0.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081554/732401322_122142116384997467_1829628818371881049_n_dgnoog.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081554/629267516_122127985490997467_2960371041544096632_n_vo0c4o.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081555/627647908_122127985472997467_7134410190884819012_n_e2ehgw.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1792081555/595271327_122120063846997467_7206119052084455783_n_vjpqx7.jpg"
+            ],
+            "contact":{"phone":"443-295-8141","address":"3875 Old Town Rd, Huntingtown, MD 20639","hours":"Monday - Sunday: 11AM - 9PM"},
+            "socials":[{"platform":"facebook","url":"https://www.facebook.com/profile.php?id=61579924017557"}]
+        };
+    </script>
+</head>
+<body>
+
+    <!-- SVG Decorations -->
+    <svg class="deco-svg deco-1" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" fill="#FF9800" stroke="#4E342E" stroke-width="4" stroke-linejoin="round"/>
+    </svg>
+    <svg class="deco-svg deco-2" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="30" fill="#E91E63" stroke="#4E342E" stroke-width="4"/>
+        <path d="M50 20 L50 80 M20 50 L80 50" stroke="#4E342E" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="navbar-brand" id="nav-brand">TAQUERIA DON JOSE</a>
+            <button class="navbar-toggler" id="navbar-toggler" aria-label="Toggle navigation">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#" class="nav-link" data-es="Inicio" data-en="Home">Home</a></li>
+                <li><a href="#about-section" class="nav-link" data-es="Nosotros" data-en="About Us">About Us</a></li>
+                <li><a href="#gallery-section" class="nav-link" data-es="Menú" data-en="Menu">Menu</a></li>
+                <li><a href="#reviews-section" class="nav-link" data-es="Reseñas" data-en="Reviews">Reviews</a></li>
+                <li class="lang-switch">
+                    <span id="lang-es" class="lang-btn" onclick="applyLanguage('es')">ES</span>
+                    <span class="lang-divider">|</span>
+                    <span id="lang-en" class="lang-btn active" onclick="applyLanguage('en')">EN</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero-section">
+        <div class="hero-bg-img"></div>
+        <div class="hero-content">
+            <div class="hero-logo-container">
+                <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1792081318/TaqueriaDonJoseLOGO_iodgsv.png" id="hero-logo" alt="Taqueria Don Jose Logo" class="hero-logo" width="150" height="150">
+            </div>
+            <h1 class="hero-title" data-es="¡SABOR AUTÉNTICO MEXICANO!" data-en="AUTHENTIC MEXICAN FLAVOR!">AUTHENTIC MEXICAN FLAVOR!</h1>
+            <p class="hero-address" id="hero-address">3875 Old Town Rd, Huntingtown, MD 20639</p>
+            
+            <div class="hero-buttons">
+                <!-- CÓDIGO EXACTO GLORIAFOOD - SIN MODIFICACIONES -->
+                <!-- If you would like to customize the button, remove or change the "class" attribute inside the <span> tag -->
+                <span class="glf-button" data-glf-cuid="1308a7fe-0b08-41ea-92c8-9ff2b481c543" data-glf-ruid="fc032d82-7466-4ba9-8694-8b537f317acb" >Ver el MENÚ y PEDIR</span>
+                <script src="https://www.fbgcdn.com/embedder/js/ewm2.js" defer async ></script>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section" id="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 class="section-title" id="about-title" data-es="Somos Taquería Don José" data-en="We are Taqueria Don Jose">We are Taqueria Don Jose</h2>
+                    <span class="section-subtitle" id="about-subtitle" data-es="Conócenos" data-en="About Us">About Us</span>
+                    <p data-es="En Taquería Don José nos apasiona compartir los deliciosos sabores de la auténtica comida mexicana. Nuestro objetivo es reunir a las personas a través de platos frescos y sabrosos, con una cálida hospitalidad." data-en="At Taqueria Don Jose, we are passionate about sharing the delicious flavors of authentic Mexican food. Our goal is to bring people together through fresh, flavorful dishes, warm hospitality, and a welcoming atmosphere.">At Taqueria Don Jose, we are passionate about sharing the delicious flavors of authentic Mexican food. Our goal is to bring people together through fresh, flavorful dishes, warm hospitality, and a welcoming atmosphere.</p>
+                    <p data-es="Cada visita es una oportunidad para disfrutar de una excelente comida y crear recuerdos maravillosos. ¡El secreto de nuestro éxito es usar ingredientes frescos y de alta calidad!" data-en="Every visit is an opportunity to enjoy great food and create wonderful memories. The secret to our success is using fresh, high-quality ingredients!">Every visit is an opportunity to enjoy great food and create wonderful memories. The secret to our success is using fresh, high-quality ingredients!</p>
+                </div>
+                <div class="about-images">
+                    <img id="about-img-1" src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_600/v1792081336/538092503_122095818824997467_3117063213037309063_n_vjjg1f.jpg" alt="Mexican Food" class="about-image" loading="lazy">
+                    <img id="about-img-2" src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_600/v1792081344/582992828_122117153606997467_8128709734301550389_n_itsyxg.jpg" alt="Authentic Mexican Dish" class="about-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery-section">
+        <div class="container">
+            <h2 class="section-title centered" data-es="Deliciosa Comida Mexicana" data-en="Delicious Mexican Food">Delicious Mexican Food</h2>
+            <span class="section-subtitle centered" data-es="Amor al Primer Bocado" data-en="Love At First Bite">Love At First Bite</span>
+            <div id="gallery-container" class="gallery-grid">
+                <!-- Se inyectan dinámicamente las 19 imágenes mediante JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section (Script JS Smooth Auto-Scroll) -->
+    <section class="reviews-section" id="reviews-section">
+        <div class="container">
+            <h2 class="section-title centered" data-es="Lo Que Dicen Nuestros Clientes" data-en="What Our Customers Say">What Our Customers Say</h2>
+            <span class="section-subtitle centered" data-es="Recomendaciones" data-en="Recommendations">Recommendations</span>
+            
+            <div class="reviews-slider-container">
+                <div class="reviews-slider" id="reviews-slider">
+                    <!-- Base Review Cards (Serán clonadas por el Script para dar la ilusión de bucle infinito) -->
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">R</div>
+                            <div class="reviewer-info">
+                                <h4>Rebecca Hyndman</h4>
+                                <span data-es="Local Guide · 19 opiniones" data-en="Local Guide · 19 reviews">Local Guide · 19 reviews</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text" data-es="¡Comida muy rica! Los tacos de carne asada y de camarones estaban realmente buenos." data-en="Very tasty food! The carne asada and shrimp tacos were really good.">Very tasty food! The carne asada and shrimp tacos were really good.</p>
+                        <div class="review-meta">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#4285F4"><path d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.1,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1V11.1Z"/></svg>
+                            <span data-es="Traducido de Google" data-en="Translated by Google">Translated by Google</span>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar" style="background: var(--color-detail-pink);">r</div>
+                            <div class="reviewer-info">
+                                <h4>rachel tretow</h4>
+                                <span data-es="Local Guide · 21 opiniones" data-en="Local Guide · 21 reviews">Local Guide · 21 reviews</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text" data-es="¡Tantos bocados deliciosos!: tacos de camarones, chorizo, al pastor y carne con horchata y elote. Todo estaba riquísimo y el personal fue muy atento. Un lugar sencillo, pero que vale la pena." data-en="So many delicious bites!: shrimp, chorizo, al pastor and meat tacos with horchata and elote. Everything was delicious and staff was very attentive. A simple place, but totally worth it.">So many delicious bites!: shrimp, chorizo, al pastor and meat tacos with horchata and elote. Everything was delicious and staff was very attentive. A simple place, but totally worth it.</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar" style="background: var(--color-accent-orange);">K</div>
+                            <div class="reviewer-info">
+                                <h4>Kaitlyn Bird</h4>
+                                <span data-es="1 opinión" data-en="1 review">1 review</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text" data-es="La comida es realmente buena, recomiendo mucho este lugar para comida mexicana rápida para llevar." data-en="The food is really good, I highly recommend this place for quick Mexican food takeout.">The food is really good, I highly recommend this place for quick Mexican food takeout.</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar" style="background: var(--color-btn-green);">T</div>
+                            <div class="reviewer-info">
+                                <h4>Ted Stevenson</h4>
+                                <span data-es="Local Guide · 65 opiniones" data-en="Local Guide · 65 reviews">Local Guide · 65 reviews</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text" data-es="Estoy en la ciudad por trabajo, vengo de Arizona, y este lugar es auténtico. Pedí al pastor y estaba delicioso. Esta es comida mexicana de verdad." data-en="I'm in town for work, coming from Arizona, and this place is authentic. Ordered al pastor and it was delicious. This is real Mexican food.">I'm in town for work, coming from Arizona, and this place is authentic. Ordered al pastor and it was delicious. This is real Mexican food.</p>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar" style="background: var(--color-detail-pink);">J</div>
+                            <div class="reviewer-info">
+                                <h4>Jess H</h4>
+                                <span data-es="2 opiniones" data-en="2 reviews">2 reviews</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text" data-es="Pedí tacos, arroz y frijoles fritos para llevar, ¡y la comida estaba absolutamente deliciosa! Sin duda volveré." data-en="Ordered tacos, rice and refried beans to go, and the food was absolutely delicious! Will definitely be back.">Ordered tacos, rice and refried beans to go, and the food was absolutely delicious! Will definitely be back.</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar" style="background: var(--color-accent-orange);">J</div>
+                            <div class="reviewer-info">
+                                <h4>Josh Patten</h4>
+                                <span data-es="4 opiniones" data-en="4 reviews">4 reviews</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text" data-es="La mejor quesadilla de la historia 😍" data-en="Best quesadilla ever 😍">Best quesadilla ever 😍</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar" style="background: var(--color-subtle-purple);">R</div>
+                            <div class="reviewer-info">
+                                <h4>R Hall</h4>
+                                <span data-es="3 opiniones" data-en="3 reviews">3 reviews</span>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text" data-es="Como chef con muchos años de experiencia en comida tex-mex, no vas a encontrar mejores tacos en ningún otro lugar." data-en="As a chef with many years of experience in tex-mex food, you won't find better tacos anywhere else.">As a chef with many years of experience in tex-mex food, you won't find better tacos anywhere else.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section" id="info-section">
+        <div class="container">
+            <div class="info-box">
+                <h2 class="section-title centered" data-es="Información" data-en="Information">Information</h2>
+                <span class="section-subtitle centered" data-es="¡Visítanos Pronto!" data-en="Visit Us Soon!">Visit Us Soon!</span>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4 data-es="Horarios" data-en="Opening Hours">Opening Hours</h4>
+                        <p id="info-hours" data-es="Lunes - Domingo: 11AM - 9PM" data-en="Monday - Sunday: 11AM - 9PM">Monday - Sunday: 11AM - 9PM</p>
+                    </div>
+                    <div class="info-item">
+                        <h4 data-es="Teléfono" data-en="Phone">Phone</h4>
+                        <p id="info-phone">443-295-8141</p>
+                    </div>
+                    <div class="info-item">
+                        <h4 data-es="Dirección" data-en="Address">Address</h4>
+                        <p id="info-address">3875 Old Town Rd, Huntingtown, MD 20639</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 class="footer-title" data-es="Contáctanos" data-en="Contact Us">Contact Us</h4>
+                    <p id="footer-address">3875 Old Town Rd, Huntingtown, MD 20639</p>
+                    <p id="footer-phone" data-es="Teléfono: 443-295-8141" data-en="Phone: 443-295-8141">Phone: 443-295-8141</p>
+                    <div id="social-icons" class="social-icons">
+                        <!-- Dynamically filled -->
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title" data-es="Horarios" data-en="Opening Hours">Opening Hours</h4>
+                    <p id="footer-hours" data-es="Lunes - Domingo: 11AM - 9PM" data-en="Monday - Sunday: 11AM - 9PM">Monday - Sunday: 11AM - 9PM</p>
+                </div>
+            </div>
+            
+            <div class="footer-copyright">
+                © 2015-<span id="dynamic-year"></span> Powered by <a href="https://menutech.xyz" target="_blank">Menutech</a>. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Set dynamic year in footer seamlessly 
+        document.getElementById('dynamic-year').textContent = new Date().getFullYear();
+
+        /* Menutech bilingual and dynamic content logic */
+        const optimizeCloudinaryUrl = (url, options = {}) => {
+            if (!url || typeof url !== 'string' || !url.includes('res.cloudinary.com')) return url;
+            const [baseUrl, hash] = url.split('#');
+            if (!baseUrl.includes('/upload/')) return url;
+            const parts = baseUrl.split('/upload/');
+
+            let pathSegments = parts[1].split('/');
+            if (pathSegments.length > 1) {
+                const firstSegment = pathSegments[0];
+                const isVersion = /^v\d+$/.test(firstSegment);
+                const isTransformation = !isVersion && (firstSegment.includes('_') || firstSegment.includes(','));
+                if (isTransformation) pathSegments.shift();
+            }
+            const cleanPath = pathSegments.join('/');
+
+            let transformations = ['f_auto', 'q_auto:eco', 'dpr_auto'];
+            if (options.width) transformations.push(`w_${options.width}`);
+            else transformations.push('w_400');
+            if (options.height) transformations.push(`h_${options.height}`);
+            if (options.crop) transformations.push(`c_${options.crop}`);
+            
+            const transformationString = transformations.join(',');
+            const optimizedUrl = `${parts[0]}/upload/${transformationString}/${cleanPath}`;
+            return hash ? `${optimizedUrl}#${hash}` : optimizedUrl;
+        };
+
+        const SOCIAL_ICONS = {
+            instagram: `<svg style="width:24px;height:24px;fill:currentColor" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>`,
+            facebook: `<svg style="width:24px;height:24px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>`,
+            whatsapp: `<svg style="width:24px;height:24px;fill:currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.81 9.81 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.22 8.22 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.44 0-2.85-.38-4.1-1.11l-.29-.17-3.06.81.82-2.98-.19-.3a8.22 8.22 0 0 1-1.26-4.48c0-4.54 3.7-8.23 8.24-8.23m-3.85 3.09c-.21 0-.45.03-.66.24-.21.21-.81.79-.81 1.94s.84 2.25.96 2.41c.12.16 1.63 2.49 3.96 3.5.55.24 1 .38 1.34.49.56.18 1.07.15 1.48.09.45-.06 1.39-.57 1.58-1.12.2-.55.2-1.02.14-1.12-.06-.1-.21-.16-.45-.27-.24-.12-1.39-.69-1.61-.77-.22-.08-.37-.12-.53.12-.16.24-.61.77-.75.93-.14.16-.27.18-.51.06-.24-.12-.99-.36-1.89-1.16-.7-.62-1.17-1.39-1.31-1.63-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.15.16-.25.24-.42.08-.17.04-.32-.02-.45-.06-.13-.53-1.28-.73-1.75-.19-.48-.39-.41-.53-.42l-.44-.01Z"/></svg>`,
+            twitter: `<svg style="width:24px;height:24px;fill:currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98-3.56-.18-6.73-1.89-8.84-4.48-.37.63-.58 1.37-.58 2.15 0 1.48.75 2.78 1.89 3.55-.7 0-1.36-.21-1.94-.53v.05c0 2.05 1.45 3.78 3.39 4.17-.36.1-.74.15-1.13.15-.27 0-.54-.03-.8-.08.54 1.68 2.11 2.9 3.97 2.93-1.46 1.14-3.29 1.82-5.3 1.82-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23Z"/></svg>`,
+            tiktok: `<svg style="width:24px;height:24px;fill:currentColor" viewBox="0 0 24 24"><path d="M12.525.025c-3.309-.066-6.108 2.247-6.726 5.485-.043.226-.065.457-.065.688v9.914c0 2.454-1.988 4.444-4.444 4.444-2.455 0-4.444-1.99-4.444-4.444 0-2.455 1.989-4.445 4.444-4.445.698 0 1.358.164 1.94.453v-3.22c-.62-.162-1.272-.25-1.94-.25-4.225 0-7.649 3.424-7.649 7.649 0 4.225 3.424 7.648 7.649 7.648 4.226 0 7.649-3.423 7.649-7.648V6.89c1.677 1.341 3.784 2.143 6.064 2.143v-3.22c-2.316 0-4.39-.993-5.833-2.585-.563-.623-1.009-1.346-1.31-2.13-.195-.512-.315-1.06-.35-1.625h-3.348z"/></svg>`
+        };
+
+        let currentLang = 'en';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            
+            // This selects all nodes EXCEPT those related to GloriaFood to prevent unbinding
+            document.querySelectorAll('[data-es]').forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text && !el.classList.contains('glf-button')) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = text;
+                    else el.textContent = text;
+                }
+            });
+
+            // Update switch UI
+            const esBtn = document.getElementById('lang-es');
+            const enBtn = document.getElementById('lang-en');
+            if (!esBtn || !enBtn) return;
+
+            if (lang === 'es') {
+                esBtn.classList.add('active');
+                enBtn.classList.remove('active');
+            } else {
+                enBtn.classList.add('active');
+                esBtn.classList.remove('active');
+            }
+        }
+
+        function updateUI(data) {
+            if (!data) return;
+
+            // Language switch
+            if (data.lang) applyLanguage(data.lang);
+
+            // Title
+            if (data.title) {
+                const navBrand = document.getElementById('nav-brand');
+                if (navBrand) navBrand.textContent = data.title;
+            }
+
+            // Logo & Favicon
+            if (data.logoImg) {
+                const logo = document.getElementById('hero-logo');
+                const favicon = document.getElementById('favicon');
+                const optimizedLogo = optimizeCloudinaryUrl(data.logoImg, { width: 250 });
+                if (logo) logo.src = optimizedLogo;
+                if (favicon) favicon.href = optimizedLogo;
+            }
+            
+            // Hero Background
+            if (data.heroImg) {
+                const heroBg = document.querySelector('.hero-bg-img');
+                if (heroBg) heroBg.style.backgroundImage = `url('${optimizeCloudinaryUrl(data.heroImg, { width: 1600 })}')`;
+            }
+
+            // About Images
+            if (data.aboutImg1) {
+                const img1 = document.getElementById('about-img-1');
+                if (img1) img1.src = optimizeCloudinaryUrl(data.aboutImg1, { width: 600 });
+            }
+            if (data.aboutImg2) {
+                const img2 = document.getElementById('about-img-2');
+                if (img2) img2.src = optimizeCloudinaryUrl(data.aboutImg2, { width: 600 });
+            }
+
+            // Address & Contacts mapping
+            if (data.contact) {
+                const elements = [
+                    { id: 'hero-address', text: data.contact.address },
+                    { id: 'info-address', text: data.contact.address },
+                    { id: 'footer-address', text: data.contact.address },
+                    { id: 'info-phone', text: data.contact.phone },
+                    { id: 'info-hours', text: data.contact.hours, attr: true },
+                    { id: 'footer-hours', text: data.contact.hours, attr: true }
+                ];
+                
+                elements.forEach(el => {
+                    const node = document.getElementById(el.id);
+                    if (node && el.text) {
+                        node.textContent = el.text;
+                        if(el.attr) {
+                            node.setAttribute('data-es', el.text);
+                            node.setAttribute('data-en', el.text);
+                        }
+                    }
+                });
+                
+                const footerPhone = document.getElementById('footer-phone');
+                if (footerPhone && data.contact.phone) {
+                    footerPhone.setAttribute('data-es', `Teléfono: ${data.contact.phone}`);
+                    footerPhone.setAttribute('data-en', `Phone: ${data.contact.phone}`);
+                    footerPhone.textContent = currentLang === 'es' ? `Teléfono: ${data.contact.phone}` : `Phone: ${data.contact.phone}`;
+                }
+            }
+
+            // Section Visibility
+            const sections = {
+                'about-section': data.showAbout !== false,
+                'gallery-section': data.showGallery !== false,
+                'info-section': data.showInfo !== false
+            };
+            Object.keys(sections).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = sections[id] ? '' : 'none';
+            });
+
+            // Socials
+            if (data.socials) {
+                const container = document.getElementById('social-icons');
+                if (container) {
+                    container.innerHTML = data.socials.map(s => {
+                        const platform = s.platform === 'twitter' ? 'tiktok' : s.platform;
+                        return `
+                        <a href="${s.url}" target="_blank" class="social-link" title="${platform}">
+                            ${SOCIAL_ICONS[platform] || SOCIAL_ICONS.facebook}
+                        </a>
+                    `}).join('');
+                }
+            }
+
+            // Gallery (All items load automatically)
+            if (data.gallery) {
+                const container = document.getElementById('gallery-container');
+                if (container) {
+                    container.innerHTML = data.gallery.map(img => `
+                        <img src="${optimizeCloudinaryUrl(img, { width: 500, height: 500, crop: 'fill' })}" class="gallery-img" loading="lazy" alt="Mexican Food">
+                    `).join('');
+                }
+            }
+
+            // Re-apply language translations
+            applyLanguage(currentLang);
+        }
+
+        // Script JS Smooth Auto-Scroll Infinte para Reviews
+        function initReviewsAutoScroll() {
+            const slider = document.getElementById('reviews-slider');
+            if (!slider) return;
+
+            // Clonamos los elementos internamente para que el bucle sea perfecto
+            const items = [...slider.children];
+            items.forEach(item => {
+                const clone = item.cloneNode(true);
+                slider.appendChild(clone);
+            });
+
+            let isPaused = false;
+            let scrollSpeed = 1; // Ajusta la velocidad aquí
+
+            function step() {
+                if (!isPaused) {
+                    slider.scrollLeft += scrollSpeed;
+                    // Si llegamos a la mitad exacta (donde terminan las originales y empiezan los clones), volvemos a 0 silenciosamente
+                    if (slider.scrollLeft >= (slider.scrollWidth / 2)) {
+                        slider.scrollLeft = 0;
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+
+            slider.addEventListener('mouseenter', () => isPaused = true);
+            slider.addEventListener('mouseleave', () => isPaused = false);
+            slider.addEventListener('touchstart', () => isPaused = true, {passive: true});
+            slider.addEventListener('touchend', () => isPaused = false, {passive: true});
+
+            requestAnimationFrame(step);
+        }
+
+        // Forzar Bind de GloriaFood tras inicializar
+        function triggerGloriaFoodBind() {
+            if (typeof window.glfBindButtons === 'function') {
+                window.glfBindButtons();
+            }
+        }
+
+        // Initialize state
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.MENU_TECH_STATE) updateUI(window.MENU_TECH_STATE);
+            applyLanguage('en'); // Default init
+            initReviewsAutoScroll();
+            setTimeout(triggerGloriaFoodBind, 1500); // Forzar carga 
+        });
+
+        // Editor Listeners
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'UPDATE_CONTENT') {
+                updateUI(event.data.data);
+                setTimeout(triggerGloriaFoodBind, 500);
+            }
+        });
+
+        // Navbar Toggle
+        const navbarToggler = document.getElementById('navbar-toggler');
+        const navMenu = document.getElementById('nav-menu');
+        navbarToggler.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navMenu.classList.remove('active');
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const y = target.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
